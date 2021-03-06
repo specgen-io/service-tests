@@ -1,9 +1,9 @@
 version: 2.1
 
 parameters:
-  specgen-version:
+  tests-version:
     type: string
-    default: 1.10.32
+    default: 1.0
 
 jobs:
   service-tests:
@@ -31,7 +31,7 @@ jobs:
           name: Release
           command: |
             if [ $CIRCLE_BRANCH = "main" ]; then
-              ./release.sh << pipeline.parameters.specgen-version >> ${GITHUB_TOKEN}
+              ./release.sh << pipeline.parameters.tests-version >> ${GITHUB_TOKEN}
             else
               echo "Will not release - not running on main branch"
             fi
