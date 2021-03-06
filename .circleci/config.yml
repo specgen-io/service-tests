@@ -6,7 +6,7 @@ parameters:
     default: 1.10.32
 
 jobs:
-  service-go:
+  service-tests:
     docker:
       - image: circleci/golang:1.12
     working_directory: /go/src/service-tests
