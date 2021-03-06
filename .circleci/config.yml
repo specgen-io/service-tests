@@ -39,5 +39,5 @@ jobs:
 workflows:
   service-tests:
     jobs:
-      - service-go:
+      - service-tests:
           context: specgen
