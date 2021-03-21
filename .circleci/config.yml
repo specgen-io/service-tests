@@ -3,7 +3,7 @@ version: 2.1
 parameters:
   tests-version:
     type: string
-    default: 1.0.<< pipeline.number >>
+    default: 2.0.<< pipeline.number >>
 
 jobs:
   service-tests:
