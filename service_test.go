@@ -122,3 +122,21 @@ func Test_Check_Response_Forbidden(t *testing.T) {
 
 	assert.Equal(t, resp.StatusCode, 403)
 }
+
+func Test_Echo_Body_V2(t *testing.T) {
+	data_json := `{"bool_field":true,"string_field":"the value"}`
+
+	req, err := http.NewRequest("POST", service_url+`/v2/echo/body`, strings.NewReader(data_json))
+	assert.NilError(t, err)
+
+	resp, err := http.DefaultClient.Do(req)
+	assert.NilError(t, err)
+
+	body, err := ioutil.ReadAll(resp.Body)
+	assert.NilError(t, err)
+	err = resp.Body.Close()
+	assert.NilError(t, err)
+
+	assert.Equal(t, resp.StatusCode, 200)
+	assert.Equal(t, strings.TrimSuffix(string(body), "\n"), data_json)
+}
