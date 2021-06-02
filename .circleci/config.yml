@@ -8,8 +8,8 @@ parameters:
 jobs:
   service-tests:
     docker:
-      - image: circleci/golang:1.12
-    working_directory: /go/src/service-tests
+      - image: cimg/go:1.15.6
+    working_directory: ~/service-tests
     steps:
       - checkout
       - run:
