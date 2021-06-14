@@ -70,9 +70,6 @@ func Test_Echo_Header_Params(t *testing.T) {
 func Test_Echo_Url_Params(t *testing.T) {
 	req, err := http.NewRequest("GET", service_url+`/echo/url_params/123/value`, nil)
 	assert.NilError(t, err)
-	h := req.Header
-	h.Add("Int-Header", "123")
-	h.Add("String-Header", "the value")
 
 	resp, err := http.DefaultClient.Do(req)
 	assert.NilError(t, err)
