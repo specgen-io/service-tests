@@ -16,6 +16,8 @@ func Test_Echo_Body(t *testing.T) {
 	req, err := http.NewRequest("POST", service_url+`/echo/body`, strings.NewReader(data_json))
 	assert.NilError(t, err)
 
+	req.Header.Set("Content-Type", "application/json")
+
 	resp, err := http.DefaultClient.Do(req)
 	assert.NilError(t, err)
 
@@ -46,6 +48,16 @@ func Test_Echo_Query_Params(t *testing.T) {
 
 	assert.Equal(t, resp.StatusCode, 200)
 	assert.Equal(t, strings.TrimSuffix(string(body), "\n"), `{"int_field":123,"string_field":"the value"}`)
+}
+
+func Test_Echo_Query_Params_Missing(t *testing.T) {
+	req, err := http.NewRequest("GET", service_url+`/echo/query`, nil)
+	assert.NilError(t, err)
+
+	resp, err := http.DefaultClient.Do(req)
+	assert.NilError(t, err)
+
+	assert.Equal(t, resp.StatusCode, 500)
 }
 
 func Test_Echo_Header_Params(t *testing.T) {
@@ -97,13 +109,10 @@ func Test_Check_Query_Params(t *testing.T) {
 	q.Add("p_date", "2020-01-01")
 	q.Add("p_date_array", "2020-01-01")
 	q.Add("p_date_array", "2020-01-02")
-	q.Add("p_time", "12:34")
 	q.Add("p_datetime", "2019-11-30T17:45:55")
-	q.Add("p_byte", "12")
 	q.Add("p_int", "123")
 	q.Add("p_long", "1234")
 	q.Add("p_decimal", "12345")
-	q.Add("p_char", "c")
 	q.Add("p_enum", "SECOND_CHOICE")
 	q.Add("p_string_defaulted", "value")
 	req.URL.RawQuery = q.Encode()
@@ -128,6 +137,8 @@ func Test_Echo_Body_V2(t *testing.T) {
 
 	req, err := http.NewRequest("POST", service_url+`/v2/echo/body`, strings.NewReader(data_json))
 	assert.NilError(t, err)
+
+	req.Header.Set("Content-Type", "application/json")
 
 	resp, err := http.DefaultClient.Do(req)
 	assert.NilError(t, err)
