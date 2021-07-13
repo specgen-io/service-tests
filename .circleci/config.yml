@@ -8,7 +8,7 @@ parameters:
 jobs:
   service-tests:
     docker:
-      - image: cimg/go:1.15.6
+      - image: cimg/go:1.16.4
     working_directory: ~/service-tests
     steps:
       - checkout

@@ -1,6 +1,6 @@
 module github.com/specgen-io/service-tests
 
-go 1.15
+go 1.16
 
 require (
 	github.com/google/go-cmp v0.2.0 // indirect
